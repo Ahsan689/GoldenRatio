@@ -48,6 +48,7 @@ export default function Home() {
         /**
     * Scrolls to an element with header offset
     */
+      if(window){
         const scrollto = (el) => {
          let header = select('#header')
          let offset = header.offsetHeight
@@ -62,6 +63,8 @@ export default function Home() {
            behavior: 'smooth'
          })
        }
+
+      }
  
          /**
       * Mobile nav toggle
@@ -173,21 +176,24 @@ if(window){
 * Navbar links active state on scroll
 */
 let navbarlinks = select('#navbar .scrollto', true)
-const navbarlinksActive = () => {
- let position = window.scrollY + 200
- navbarlinks.forEach(navbarlink => {
-   if (!navbarlink.hash) return
-   let section = select(navbarlink.hash)
-   if (!section) return
-   if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-     navbarlink.classList.add('active')
-   } else {
-     navbarlink.classList.remove('active')
-   }
- })
+if(window){
+  const navbarlinksActive = () => {
+   let position = window.scrollY + 200
+   navbarlinks.forEach(navbarlink => {
+     if (!navbarlink.hash) return
+     let section = select(navbarlink.hash)
+     if (!section) return
+     if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+       navbarlink.classList.add('active')
+     } else {
+       navbarlink.classList.remove('active')
+     }
+   })
+  }
+  window.addEventListener('load', navbarlinksActive)
+  onscroll(document, navbarlinksActive)
+
 }
-window.addEventListener('load', navbarlinksActive)
-onscroll(document, navbarlinksActive)
 
 
 
@@ -195,30 +201,33 @@ onscroll(document, navbarlinksActive)
 /**
 * Porfolio isotope and filter
 */
-window.addEventListener('load', () => {
- let portfolioContainer = select('.portfolio-container');
- if (portfolioContainer) {
-   let portfolioIsotope = new Isotope(portfolioContainer, {
-     itemSelector: '.portfolio-item'
-   });
+if(window){
 
-   let portfolioFilters = select('#portfolio-flters li', true);
-
-   on('click', '#portfolio-flters li', function(e) {
-     e.preventDefault();
-     portfolioFilters.forEach(function(el) {
-       el.classList.remove('filter-active');
+  window.addEventListener('load', () => {
+   let portfolioContainer = select('.portfolio-container');
+   if (portfolioContainer) {
+     let portfolioIsotope = new Isotope(portfolioContainer, {
+       itemSelector: '.portfolio-item'
      });
-     this.classList.add('filter-active');
-
-     portfolioIsotope.arrange({
-       filter: this.getAttribute('data-filter')
-     });
-
-   }, true);
- }
-
-});
+  
+     let portfolioFilters = select('#portfolio-flters li', true);
+  
+     on('click', '#portfolio-flters li', function(e) {
+       e.preventDefault();
+       portfolioFilters.forEach(function(el) {
+         el.classList.remove('filter-active');
+       });
+       this.classList.add('filter-active');
+  
+       portfolioIsotope.arrange({
+         filter: this.getAttribute('data-filter')
+       });
+  
+     }, true);
+   }
+  
+  });
+}
 
 
  /**
@@ -230,15 +239,18 @@ window.addEventListener('load', () => {
 
  let backtotop = select('.back-to-top')
 if (backtotop) {
- const toggleBacktotop = () => {
-   if (window.scrollY > 100) {
-     backtotop.classList.add('active')
-   } else {
-     backtotop.classList.remove('active')
-   }
- }
- window.addEventListener('load', toggleBacktotop)
- onscroll(document, toggleBacktotop)
+  if(window){
+    const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+        backtotop.classList.add('active')
+      } else {
+        backtotop.classList.remove('active')
+      }
+    }
+    window.addEventListener('load', toggleBacktotop)
+    onscroll(document, toggleBacktotop)
+
+  }
 }
 
 let proxy = { skew: 0 },
