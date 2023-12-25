@@ -48,7 +48,7 @@ export default function Home() {
         /**
     * Scrolls to an element with header offset
     */
-      if(window){
+      if(window !== undefined){
         const scrollto = (el) => {
          let header = select('#header')
          let offset = header.offsetHeight
@@ -154,7 +154,7 @@ const onscroll = (el, listener) => {
 /**
 * Toggle .header-scrolled class to #header when page is scrolled
 */
-if(window){
+if(window !== undefined) {
   let selectHeader = select('#header')
   if (selectHeader) {
     const headerScrolled = () => {
@@ -176,7 +176,7 @@ if(window){
 * Navbar links active state on scroll
 */
 let navbarlinks = select('#navbar .scrollto', true)
-if(window){
+if(window !== undefined){
   const navbarlinksActive = () => {
    let position = window.scrollY + 200
    navbarlinks.forEach(navbarlink => {
@@ -201,7 +201,7 @@ if(window){
 /**
 * Porfolio isotope and filter
 */
-if(window){
+if(window !== undefined){
 
   window.addEventListener('load', () => {
    let portfolioContainer = select('.portfolio-container');
@@ -239,7 +239,7 @@ if(window){
 
  let backtotop = select('.back-to-top')
 if (backtotop) {
-  if(window){
+  if(window !== undefined){
     const toggleBacktotop = () => {
       if (window.scrollY > 100) {
         backtotop.classList.add('active')
