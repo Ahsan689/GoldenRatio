@@ -237,6 +237,7 @@ if(window !== undefined){
    selector: '.portfolio-lightbox'
  });
 
+ 
  let backtotop = select('.back-to-top')
 if (backtotop) {
   if(window !== undefined){
